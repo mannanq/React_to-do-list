@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import Header from './components/layout/Header';
 import Todos from './components/Todos';
+import AddTodo from './components/AddTodo';
+import './App.css';
 
 export class App extends Component {
     state = {
@@ -22,6 +25,7 @@ export class App extends Component {
         ]
     };
 
+    // method to mark a todo-item as complete or in-complete
     markComplete = id => {
         this.setState({
             todos: this.state.todos.map(todo => {
@@ -32,13 +36,26 @@ export class App extends Component {
             })
         });
     };
+
+    // delete a to-do item
+    deleteThis = id => {
+        this.setState({
+            // filter out the todo item where the todo.id === id passed in and return the rest of them
+            todos: [...this.state.todos.filter(todo => todo.id !== id)]
+        });
+    };
     render() {
         return (
-            <div>
-                <Todos
-                    todos={this.state.todos}
-                    markComplete={this.markComplete}
-                />
+            <div className="App">
+                <div className="container">
+                    <Header />
+                    <AddTodo />
+                    <Todos
+                        todos={this.state.todos}
+                        markComplete={this.markComplete}
+                        deleteThis={this.deleteThis}
+                    />
+                </div>
             </div>
         );
     }
