@@ -6,7 +6,7 @@ export class TodoItem extends Component {
             background: '#f4f4f4',
             padding: '10px',
             borderBottom: '1px #ccc dotted',
-            textDecoration: this.props.todo.isComplete ? 'line-through' : 'none'
+            textDecoration: this.props.todo.completed ? 'line-through' : 'none'
         };
     };
 
@@ -32,9 +32,11 @@ export class TodoItem extends Component {
     }
 }
 
-// validation
+// prop types
 TodoItem.propTypes = {
-    todo: propTypes.object.isRequired
+    todo: propTypes.object.isRequired,
+    markComplete: propTypes.func.isRequired,
+    deleteThis: propTypes.func.isRequired
 };
 
 const btnStyle = {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
 export class AddTodo extends Component {
     state = {
@@ -8,9 +9,15 @@ export class AddTodo extends Component {
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
     };
+
+    onSubmit = e => {
+        e.preventDefault();
+        this.props.addTodo(this.state.title);
+        this.setState({ title: '' });
+    };
     render() {
         return (
-            <form style={{ display: 'flex' }}>
+            <form style={{ display: 'flex' }} onSubmit={this.onSubmit}>
                 <input
                     type="text"
                     name="title"
@@ -29,5 +36,9 @@ export class AddTodo extends Component {
         );
     }
 }
+
+AddTodo.propTypes = {
+    addTodo: propTypes.func.isRequired
+};
 
 export default AddTodo;
