@@ -6,20 +6,27 @@ export class TodoItem extends Component {
             background: '#f4f4f4',
             padding: '10px',
             borderBottom: '1px #ccc dotted',
+            // this style checks if a todo is completed or not, then applies respective styling
             textDecoration: this.props.todo.completed ? 'line-through' : 'none'
         };
     };
 
     render() {
+        // A todo is passed as a prop into this component. Use ES6 destructuring to extract id and title of the todo
+
         const { id, title } = this.props.todo;
         return (
             <div style={this.getStyle()}>
                 <input
                     type="checkbox"
+                    // add onChange event to get complete/incomplete functionality. "this" points to this particular todo item!
+
                     onChange={this.props.markComplete.bind(this, id)}
                 />
+                {/* the title of a todo gets put into a p tag */}
                 <p>
                     {title}
+                    {/* add a delete button. "this" points to this particular todo item! */}
                     <button
                         onClick={this.props.deleteThis.bind(this, id)}
                         style={btnStyle}

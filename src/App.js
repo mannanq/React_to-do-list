@@ -22,7 +22,6 @@ export class App extends Component {
 
     // method to mark a todo-item as complete or in-complete
     markComplete = id => {
-        console.log(id);
         this.setState({
             todos: this.state.todos.map(todo => {
                 if (todo.id === id) {
@@ -70,8 +69,12 @@ export class App extends Component {
                                 <React.Fragment>
                                     <AddTodo addTodo={this.addTodo} />
                                     <Todos
+                                        // props :
+                                        // todos prop
                                         todos={this.state.todos}
+                                        // todos also get markComplete props which is basically a method
                                         markComplete={this.markComplete}
+                                        // todos also get deleteThis props which is also a method
                                         deleteThis={this.deleteThis}
                                     />
                                 </React.Fragment>
